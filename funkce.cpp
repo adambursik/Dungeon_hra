@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int scitacni(int a , int b){
+int scitani(int a , int b){
 return a+b;
 }
 int odcitani (int a , int b){
@@ -19,7 +19,7 @@ int main() {
   char pocet;
   int x;
   int y;
-  double vysldek;
+  double vysledek;
   cout<<"zadejte 2 èisla a znak. \n";
   cout<<"1. cislo: \n";
   cin>> x;
@@ -31,16 +31,23 @@ int main() {
   switch (pocet){
 
   case '+':
-      int scitani (x, y);
-
+      vysledek = scitani (x, y);
+cout << "Souèet: " << vysledek << endl;
+break;
   case '-':
-
+      vysledek = odcitani (x, y);
+cout << "Rozdil: " << vysledek << endl;
+break;
 
   case '*':
-
+      vysledek = nasobeni (x, y);
+cout << "Nasobek: " << vysledek << endl;
+break;
 
   case '/':
-
+      vysledek = deleni (x, y);
+cout << "Podil: " << vysledek << endl;
+break;
 
   default:
     cout<<"Neco mas blbe blbecku";

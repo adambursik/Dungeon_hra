@@ -8,6 +8,7 @@ int main(){
     system("cls");
     int vybertyp;
     int pokracovattyp=1;
+srand(time(0));
     string typy[4] = {"Mage", "Warrior", "Assasin", "Archer"};
 
     int staty[4][3] = {
@@ -16,6 +17,30 @@ int main(){
         {40, 100, 150},
         {80, 70, 200}
     };
+string monstra[16] = {"Goblin Scout", "Goblin Warrior", "Goblin Archer", "Goblin Merchant",
+"Skeleton Pawn", "Skeleton Warrior", "Skeleton Archer", "Zombie",
+    "Giant Rat", "Cave Spider", "Vampire Bat", "Dire Wolf",
+    "Orc Scout", "Orc Warrior", "Kobold Miner", "Slime"
+};
+int statymonstra[16][3] = {
+    {40, 10, 20},
+    {60, 15, 35},
+    {45, 12, 30},
+    {30, 2, 250},
+    {50, 12, 15},
+    {70, 18, 40},
+    {55, 15, 30},
+    {90, 8, 20},
+    {35, 10, 10},
+    {50, 14, 0},
+    {30, 12, 0},
+    {65, 20, 0},
+    {70, 15, 50},
+    {110, 25, 100},
+    {60, 14, 75},
+    {40, 8, 10}
+};
+
 do{    
     do{
 

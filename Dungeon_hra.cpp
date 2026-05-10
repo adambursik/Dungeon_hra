@@ -3,11 +3,45 @@
 #include <iomanip>
 
 using namespace std;
+void vesnice () {
+cout<< " - - - VESNICE - - - ";
+cout<<endl;
+int vyberves=0;
+cout<<"Vyberte co chcete delat ve vesnici.\n";
+cout<<endl<<setw(15)<<" [1]  NAKUP VYBAVENI\n";
+cout<<endl<<setw(15)<<" [2] UZDRAVENI\n";
+cout<<endl<<setw(15)<<" [3] VYLEPSENI UTOKU / SCHOPNOSTI\n";
+cout<<endl<<setw(15)<<" [4] VYLEPSENI MANY\n";
+cout<<endl<<setw(15)<<" [5] VYLEPSENI MAX ZIVOTU\n";
+
+cin>>vyberves;
+switch (vyberves){
+
+case 1:
+cout<<"Vybrali jste si NAKUP VYBAVENI\n";
+
+break;
+case 2:
+cout<<"Vybrali jste si UZDRAVENI\n";
+break;
+case 3:
+cout<<"Vybrali jste si VYLEPSENI UTOKU / SCHOPNOSTI\n";
+break;
+case 4:
+cout<<"Vybrali jste si VYLEPSENI MANY\n";
+break;
+case 5:
+cout<<"Vybrali jste si VYLEPSENI MAX ZIVOTU\n";
+break;
+default:
+cout<<"SPATNE zadana hodnota!";
+}
 
 int main(){
     system("cls");
     int vybertyp;
     int pokracovattyp=1;
+srand(time(0));
     string typy[4] = {"Mage", "Warrior", "Assasin", "Archer"};
 
     int staty[4][3] = {
@@ -16,6 +50,30 @@ int main(){
         {40, 100, 150},
         {80, 70, 200}
     };
+string monstra[16] = {"Goblin Scout", "Goblin Warrior", "Goblin Archer", "Goblin Merchant",
+"Skeleton Pawn", "Skeleton Warrior", "Skeleton Archer", "Zombie",
+    "Giant Rat", "Cave Spider", "Vampire Bat", "Dire Wolf",
+    "Orc Scout", "Orc Warrior", "Kobold Miner", "Slime"
+};
+int statymonstra[16][3] = {
+    {40, 10, 20},
+    {60, 15, 35},
+    {45, 12, 30},
+    {30, 2, 250},
+    {50, 12, 15},
+    {70, 18, 40},
+    {55, 15, 30},
+    {90, 8, 20},
+    {35, 10, 10},
+    {50, 14, 0},
+    {30, 12, 0},
+    {65, 20, 0},
+    {70, 15, 50},
+    {110, 25, 100},
+    {60, 14, 75},
+    {40, 8, 10}
+};
+
 do{    
     do{
 

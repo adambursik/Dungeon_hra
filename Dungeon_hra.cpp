@@ -3,6 +3,39 @@
 #include <iomanip>
 
 using namespace std;
+void vesnice () {
+cout<< " - - - VESNICE - - - ";
+cout<<endl;
+int vyberves=0;
+cout<<"Vyberte co chcete delat ve vesnici.\n";
+cout<<endl<<setw(15)<<" [1]  NAKUP VYBAVENI\n";
+cout<<endl<<setw(15)<<" [2] UZDRAVENI\n";
+cout<<endl<<setw(15)<<" [3] VYLEPSENI UTOKU / SCHOPNOSTI\n";
+cout<<endl<<setw(15)<<" [4] VYLEPSENI MANY\n";
+cout<<endl<<setw(15)<<" [5] VYLEPSENI MAX ZIVOTU\n";
+
+cin>>vyberves;
+switch (vyberves){
+
+case 1:
+cout<<"Vybrali jste si NAKUP VYBAVENI\n";
+
+break;
+case 2:
+cout<<"Vybrali jste si UZDRAVENI\n";
+break;
+case 3:
+cout<<"Vybrali jste si VYLEPSENI UTOKU / SCHOPNOSTI\n";
+break;
+case 4:
+cout<<"Vybrali jste si VYLEPSENI MANY\n";
+break;
+case 5:
+cout<<"Vybrali jste si VYLEPSENI MAX ZIVOTU\n";
+break;
+default:
+cout<<"SPATNE zadana hodnota!";
+}
 
 int main(){
     system("cls");

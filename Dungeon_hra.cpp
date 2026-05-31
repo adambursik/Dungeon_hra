@@ -80,7 +80,7 @@ void Statistiky(Hrac hrac) {
          << "   |   DMG: " << hrac.max_dmg << "\n";
     cout << "=====================================================================\n\n";
 }
-void boj_monstra(int hrdina){;
+void boj_monstra(int hrdina){
 int vyberAtck;
 int protivnik_monstrum = rand ()%17;
 do{
@@ -91,9 +91,9 @@ cout << "     POTKAL JSI: " << seznamMonster[protivnik_monstrum].jmeno << "\n";
 cout << "     HP: " << seznamMonster[protivnik_monstrum].hp << " | DMG: " << seznamMonster[protivnik_monstrum].dmg << "\n";
 cout << "   =========================================\n\n";
 
-cout << "   [1] BASIC UTOK  ( "<<hrac.max_dmg * nasobkySchopnosti[hrdina][0]<<" DMG\n";
-cout << "   [2] ABILITKU  ( "<<hrac.max_dmg * nasobkySchopnosti[hrdina][1]<<" DMG\n";
-cout << "   [3] SUPER ABILITKA  ( "<<hrac.max_dmg * nasobkySchopnosti[hrdina][2]<<" DMG\n\n";
+cout << "   [1] BASIC UTOK  ( "<<hrac.max_dmg * nasobkySchopnosti[hrdina][0]<<" DMG, -"<<seznamMANY[hrdina].basic<<" MN)\n";
+cout << "   [2] ABILITKU  ( "<<hrac.max_dmg * nasobkySchopnosti[hrdina][1]<<" DMG, -"<<seznamMANY[hrdina].ability<<" MN)\n";
+cout << "   [3] SUPER ABILITKA  ( "<<hrac.max_dmg * nasobkySchopnosti[hrdina][2]<<" DMG, -"<<seznamMANY[hrdina].super<<" MN)\n";
 cout << "   Volba: ";
 cin >> vyberAtck;
 
@@ -112,6 +112,7 @@ case 1:
         cout << "    Pouzil jsi Basic utok!\n";
         cout << "    Zasahl jsi " << seznamMonster[protivnik_monstrum].jmeno << " za " << udelenoDmg << " DMG.\n";
         cout << "   -----------------------------------------\n";
+        if (seznamMonster[protivnik_monstrum].hp < 0) seznamMonster[protivnik_monstrum].hp = 0;
         cout << "    Zbyvajici HP monstra: " << seznamMonster[protivnik_monstrum].hp << "\n";
         cout << "   =========================================\n\n";
     } else {
@@ -127,9 +128,10 @@ case 1:
         cout << "   =========================================\n";
         cout << "               >> TVUJ TAH <<               \n";
         cout << "   =========================================\n";
-        cout << "    Pouzil jsi Basic utok!\n";
+        cout << "    Pouzil jsi Abilitku!\n";
         cout << "    Zasahl jsi " << seznamMonster[protivnik_monstrum].jmeno << " za " << udelenoDmg << " DMG.\n";
         cout << "   -----------------------------------------\n";
+        if (seznamMonster[protivnik_monstrum].hp < 0) seznamMonster[protivnik_monstrum].hp = 0;
         cout << "    Zbyvajici HP monstra: " << seznamMonster[protivnik_monstrum].hp << "\n";
         cout << "   =========================================\n\n";
     } else {
@@ -145,7 +147,7 @@ case 3:
         cout << "   =========================================\n";
         cout << "               >> TVUJ TAH <<               \n";
         cout << "   =========================================\n";
-        cout << "    Pouzil jsi Basic utok!\n";
+        cout << "    Pouzil jsi Super abilitku!\n";
         cout << "    Zasahl jsi " << seznamMonster[protivnik_monstrum].jmeno << " za " << udelenoDmg << " DMG.\n";
         cout << "   -----------------------------------------\n";
         if (seznamMonster[protivnik_monstrum].hp < 0) seznamMonster[protivnik_monstrum].hp = 0;
@@ -162,8 +164,10 @@ cout << "   Stiskni Enter pro kolo monstra...";
 _getch();
     }while(vyberAtck<=0||vyberAtck>=4);
 Statistiky(hrac);
-
-int monstrumsila = (rand() % 4);
+if (seznamMonster[protivnik_monstrum].hp <= 0) {
+    break;
+}
+int monstrumsila = (rand() % 3) + 1;
 int monstrumDmg = 0;
 switch (monstrumsila)
 {
@@ -185,14 +189,14 @@ hrac.akt_hp -= monstrumDmg;
 cout << "   =========================================\n";
 cout << "             >> TAH MONSTRA <<              \n";
 cout << "   =========================================\n";
-cout << "    " << seznamMonster[protivnik_monstrum].jmeno << " zvedá svou zbraň!\n";
-cout << "    Zasáhl tě za " << monstrumDmg << " DMG.\n";
+cout << "    " << seznamMonster[protivnik_monstrum].jmeno << " zveda svou zbran!\n";
+cout << "    Zasahl te za " << monstrumDmg << " DMG.\n";
 cout << "   -----------------------------------------\n";
 if (hrac.akt_hp < 0) hrac.akt_hp = 0;
-cout << "    Tvoje zbývající HP: " << hrac.akt_hp << "/" << hrac.max_hp << "\n";
+cout << "    Tvoje zbyvajici HP: " << hrac.akt_hp << "/" << hrac.max_hp << "\n";
 cout << "   =========================================\n\n";
 
-cout << "   Stiskni Enter pro další kolo...";
+cout << "   Stiskni Enter pro dalsi kolo...";
 _getch();
 
 }while (hrac.akt_hp>0 && seznamMonster[protivnik_monstrum].hp>0);
@@ -203,6 +207,7 @@ system("cls");
         cout << "=========================================\n";
     } 
     else if (seznamMonster[protivnik_monstrum].hp <= 0) {
+        Statistiky(hrac);
         cout << "=========================================\n";
         cout << "            NEPRITEL PORAZEN!            \n";
         cout << "=========================================\n";
@@ -249,6 +254,8 @@ cout << "  " << setw(5) << left << "[2]" << setw(30) << left << "UZDRAVENI" << s
 cout << "  " << setw(5) << left << "[3]" << setw(30) << left << "VYLEPSENI UTOKU / SCHOPNOSTI" << setw(25) << right << "( -120G +20 DMG )" << endl;
 cout << "  " << setw(5) << left << "[4]" << setw(30) << left << "VYLEPSENI MANY" << setw(25) << right << "( -50G +30 MN )" << endl;
 cout << "  " << setw(5) << left << "[5]" << setw(30) << left << "VYLEPSENI MAX ZIVOTU" << setw(25) << right << "( -100G +30 maxHP )" << endl;
+cout << "  " << setw(5) << left << "[6]" << "NIC, JIT PRYC\n";
+cout<< "Volba: ";
 
 cin>>vyberves;
 switch (vyberves){
@@ -280,10 +287,13 @@ switch (vyberves){
             if (hrac.zlato >= 100) { hrac.akt_hp += 30; hrac.max_hp+=30; hrac.zlato -= 100; } else { cout << "Nemas dost zlata!\n"; }
             cout<<"Vybrali jste si VYLEPSENI MAX ZIVOTU\n";
             break;
+            case 6:
+            cout<<"Nic nechcete.... \n";
+            break;
             default:
             cout<<"SPATNE zadana hodnota!\n";
         }
-    }while(vyberves<=0||vyberves>=6);
+    }while(vyberves<=0||vyberves>=7);
     
     cout<<"Chcete pokracovat v nakupu (ANO=1, NE=2): ";
     cin>>pokracovat;
@@ -291,7 +301,7 @@ switch (vyberves){
 }
 int main(){
     system("cls");
-    int vybertyp;
+    int vybertyp=0;
     int pokracovattyp=1;
 srand(time(0));
     string typy[4] = {"Mage", "Warrior", "Assasin", "Archer"};
@@ -301,96 +311,58 @@ srand(time(0));
         {150, 50, 100},
         {40, 100, 150},
         {80, 70, 200}
-    };
-
-do{    
+    };  
     do{
+        do {
+system("cls");
+        cout << " ============================================================\n";
+        cout << "                      VYBER SI CLASSU                       \n";
+        cout << " ============================================================\n\n";
 
-cout<<"Vyberte si classu: "<<endl;
-cout<<endl;
-for(int i=0;i<4;i++){
-    cout<<" ["<<i+1<<"] "<<setw(10)<<typy[i]<<" | "<<endl;
-}
-cin>>vybertyp;
+        for(int i = 0; i < 4; i++) { cout << "      [" << i + 1 << "]      "; } 
+        cout << "\n ------------------------------------------------------------\n";
+        
+        for(int i = 0; i < 4; i++) { cout << "    " << setw(11) << left << typy[i]; } 
+        cout << "\n\n";
+        
+        for(int i = 0; i < 4; i++) { cout << "    " << setw(3) << right << staty[i][0] << " HP     "; } 
+        cout << "\n";
+        for(int i = 0; i < 4; i++) { cout << "    " << setw(3) << right << staty[i][1] << " DMG    "; } 
+        cout << "\n";
+        for(int i = 0; i < 4; i++) { cout << "    " << setw(3) << right << staty[i][2] << " MN     "; } 
+        cout << "\n";
+        
+        cout << "\n ============================================================\n";
+        cout << " Volba: ";
+        cin >> vybertyp;
 
-switch (vybertyp){
-case 1:
-    cout << "Vybrali jste si classu: Mage\n\n";
-    
-    cout << setw(10) << "CLASS" << " |" << setw(6) << "HP" << " |" << setw(6) << "STR" << " |" << setw(6) << "MP" << " |" << endl;
-    cout << "------------------------------------------" << endl;
 
-    cout << setw(10) << typy[0] << " |";
-    
-    for(int i = 0; i < 3; i++) {
-        cout << setw(6) << staty[0][i] << " |";
-    }
-    cout << endl;
-    break;
-case 2:
-    cout << "Vybrali jste si classu: Warrior\n\n";
-    
-    cout << setw(10) << "CLASS" << " |" << setw(6) << "HP" << " |" << setw(6) << "STR" << " |" << setw(6) << "MP" << " |" << endl;
-    cout << "------------------------------------------" << endl;
-
-    cout << setw(10) << typy[1] << " |";
-    
-    for(int i = 0; i < 3; i++) {
-        cout << setw(6) << staty[1][i] << " |";
-    }
-    cout << endl;
-    break;
-case 3:
-    cout << "Vybrali jste si classu: Assassin\n\n";
-    
-    cout << setw(10) << "CLASS" << " |" << setw(6) << "HP" << " |" << setw(6) << "STR" << " |" << setw(6) << "MP" << " |" << endl;
-    cout << "------------------------------------------" << endl;
-
-    cout << setw(10) << typy[2] << " |";
-    
-    for(int i = 0; i < 3; i++) {
-        cout << setw(6) << staty[2][i] << " |";
-    }
-    cout << endl;
-    break;
-case 4:
-    cout << "Vybrali jste si classu: Archer\n\n";
-    
-    cout << setw(10) << "CLASS" << " |" << setw(6) << "HP" << " |" << setw(6) << "STR" << " |" << setw(6) << "MP" << " |" << endl;
-    cout << "------------------------------------------" << endl;
-
-    cout << setw(10) << typy[3] << " |";
-    
-    for(int i = 0; i < 3; i++) {
-        cout << setw(6) << staty[3][i] << " |";
-    }
-    cout << endl;
-    break;
-
-default:
-cout<<"SPATNE ZADANA HODNOTA!\n";
-    break;
+switch (vybertyp) {
+    case 1:
+        cout << "Vybral sis classu: Mage\n";
+        break;
+    case 2:
+        cout << "Vybral sis classu: Warrior\n";
+        break;
+    case 3:
+        cout << "Vybral sis classu: Assasin\n";
+        break;
+    case 4:
+        cout << "Vybral sis classu: Archer\n";
+        break;
+    default:
+        cout << "Neznama classa!\n";
+        break;
 }
 } while (vybertyp<1||vybertyp>4);
-do {
-            cout << "\nChcete si vybrat jinou postavu? ( ANO=1 , NE=2 , STATISTIKY=3 ): ";
+
+            cout << "\nChcete si vybrat jinou postavu? ( ANO=1 , NE=2 ): ";
             cin >> pokracovattyp;
 
-            if (pokracovattyp < 1 || pokracovattyp > 3) {
-                cout << "SPATNE ZADANA HODNOTA!! Zadej 1, 2 nebo 3." << endl;
+            if (pokracovattyp < 1 || pokracovattyp > 2) {
+                cout << "SPATNE ZADANA HODNOTA!! Zadej 1 nebo 2." << endl;
             }
-        } while (pokracovattyp < 1 || pokracovattyp > 3);
-if (pokracovattyp==3){
-    for (int i = 0; i < 4; i++) {
-        cout << setw(15) << typy[i]
-             << " | HP: " << setw(3) << staty[i][0]
-             << " | STR: " << setw(3) << staty[i][1] 
-             << " | MP: "<<setw(3) << staty [i][2]<<endl;
-    }
-    cout<<"Pokracovat na vyber classy?( ANO=1, NE=any ) ";
-    cin>>pokracovattyp;
-}
-    } while (pokracovattyp == 1);
+                    } while (pokracovattyp == 1);
 
 hrac.jmeno = typy[vybertyp-1];
 hrac.akt_hp = staty[vybertyp-1][0];
